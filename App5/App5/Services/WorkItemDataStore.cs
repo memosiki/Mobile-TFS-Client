@@ -112,7 +112,8 @@ namespace App5.Services
                 Description = x.Fields.SystemDescription?.ToString(),
                 State = x.Fields.SystemBoardColumn?.ToString(),
                 AssignedTo = x.Fields.SystemAssignedTo?.DisplayName?.ToString(),
-                Category = x.Fields.SystemWorkItemType?.ToString()
+                Category = x.Fields.SystemWorkItemType?.ToString(),
+                Icon = Item.GetIcon(x.Fields.SystemWorkItemType?.ToString())
             });
 
             return api.ToArray();
