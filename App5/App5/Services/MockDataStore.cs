@@ -38,7 +38,7 @@ namespace App5.Services
             //  string response = await GetProjectsAsync();
         }
 
-        public static async Task<string> GetWorkItemsListAsync()
+        public static async Task<string> GetAuthorizedUrlAsync(string url)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace App5.Services
                                 string.Format("{0}:{1}", "", personalaccesstoken))));
 
                     using (HttpResponseMessage response = await client.GetAsync(
-                        "https://dev.azure.com/test-hackathon/test-project-hackathon/_apis/wit/wiql/d34e5ddb-c5c3-416c-8431-24fdfc818ead?api-version=5.0"))
+                        url))
                     {
                         response.EnsureSuccessStatusCode();
                         string responseBody = await response.Content.ReadAsStringAsync();
@@ -70,15 +70,21 @@ namespace App5.Services
             }
         }
 
-        public async Task<ApiItem> GetWorkItemsAsync()
+        public async Task<IEnumerable<WorkItemInstance>> GetWorkItemInstancesAsync()
         {
-            var response = await GetWorkItemsListAsync();
+            string workItemsListURL = "https://dev.azure.com/test-hackathon/test-project-hackathon/_apis/wit/wiql/d34e5ddb-c5c3-416c-8431-24fdfc818ead?api-version=5.0";
+            var response = await GetAuthorizedUrlAsync(workItemsListURL);
             if (string.IsNullOrEmpty(response))
                 return null;
 
-            var item = JsonConvert.DeserializeObject<ApiItem>(response);
-
-            return item;
+            var items = JsonConvert.DeserializeObject<ApiItem>(response);
+            //
+            List<WorkItemInstance> workItems = new List<WorkItemInstance> { };
+            foreach (var item in items.WorkItems)
+            {
+                workItems.Add(JsonConvert.DeserializeObject<WorkItemInstance>(await GetAuthorizedUrlAsync(item.Url.ToString())));
+            }
+            return workItems;
         }
 
 
@@ -113,13 +119,13 @@ namespace App5.Services
 
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
-            var item = await GetWorkItemsAsync();
+            var items = await GetWorkItemInstancesAsync();
 
-            var api = item.WorkItems.Select(x => new Item()
+            var api = items.Select(x => new Item()
             {
                 Id = Guid.NewGuid().ToString(),
-                Text = x.Id.ToString(),
-                Description = x.Url.ToString()
+                Text = x.Fields.SystemTitle.ToString(),
+                Description = x.Fields.SystemDescription.ToString()
             });
 
             return api.ToArray();
