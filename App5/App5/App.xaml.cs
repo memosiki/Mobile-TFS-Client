@@ -13,7 +13,7 @@ namespace App5
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<WorkItemDataStore>();
             MainPage = new MainPage();
         }
 

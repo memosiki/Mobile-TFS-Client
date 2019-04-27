@@ -13,29 +13,13 @@ using Newtonsoft.Json.Linq;
 
 namespace App5.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class WorkItemDataStore : IDataStore<Item>
     {
         List<Item> items;
 
-        public MockDataStore()
+        public WorkItemDataStore()
         {
             items = new List<Item>();
-            var mockItems = new List<Item>
-            {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
-            };
-
-
-            foreach (var item in mockItems)
-            {
-                items.Add(item);
-            }
-            //  string response = await GetProjectsAsync();
         }
 
         public static async Task<string> GetAuthorizedUrlAsync(string url)
@@ -124,8 +108,11 @@ namespace App5.Services
             var api = items.Select(x => new Item()
             {
                 Id = Guid.NewGuid().ToString(),
-                Text = x.Fields.SystemTitle.ToString(),
-                Description = x.Fields.SystemDescription.ToString()
+                Text = x.Fields.SystemTitle?.ToString(),
+                Description = x.Fields.SystemDescription?.ToString(),
+                State = x.Fields.SystemBoardColumn?.ToString(),
+                AssignedTo = x.Fields.SystemAssignedTo?.DisplayName?.ToString(),
+                Category = x.Fields.SystemWorkItemType?.ToString()
             });
 
             return api.ToArray();
