@@ -5,8 +5,24 @@
              Title="{Binding Title}">
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Text:" FontSize="Medium" />
-            <Label Text="{Binding Item.Text}" FontSize="Small"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ContentView  Grid.Row="0" Grid.Column="0">
+                    <Image Source="{Binding Item.Icon}"/>
+                </ContentView>
+                <StackLayout Grid.Row="0" Grid.Column="1">
+                    <Label Text="{Binding Item.Category}" FontSize="Medium" />
+                    <Label Text="{Binding Item.State}" FontSize="Small" />
+                </StackLayout>
+            </Grid>         
+            <Label Text="Assigned to:" FontSize="Medium" />
+            <Label Text="{Binding Item.AssignedTo}" FontSize="Small"/>
             <Label Text="Description:" FontSize="Medium" />
             <Label Text="{Binding Item.Description}" FontSize="Small"/>
         </StackLayout>

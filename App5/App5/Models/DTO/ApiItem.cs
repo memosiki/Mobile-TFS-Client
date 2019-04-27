@@ -53,13 +53,16 @@ namespace App5.Models.DTO
         public long Rev { get; set; }
 
         [JsonProperty("fields")]
-        public Fields Fields { get; set; }
+        public FieldsClass Fields { get; set; }
+
+        [JsonProperty("_links")]
+        public WorkItemInstanceLinks Links { get; set; }
 
         [JsonProperty("url")]
         public Uri Url { get; set; }
     }
 
-    public partial class Fields
+    public partial class FieldsClass
     {
         [JsonProperty("System.AreaPath")]
         public string SystemAreaPath { get; set; }
@@ -80,19 +83,19 @@ namespace App5.Models.DTO
         public string SystemReason { get; set; }
 
         [JsonProperty("System.AssignedTo")]
-        public SystemAssignedToClass SystemAssignedTo { get; set; }
+        public MicrosoftVstsCommonClosedBy SystemAssignedTo { get; set; }
 
         [JsonProperty("System.CreatedDate")]
         public DateTimeOffset SystemCreatedDate { get; set; }
 
         [JsonProperty("System.CreatedBy")]
-        public SystemAssignedToClass SystemCreatedBy { get; set; }
+        public MicrosoftVstsCommonClosedBy SystemCreatedBy { get; set; }
 
         [JsonProperty("System.ChangedDate")]
         public DateTimeOffset SystemChangedDate { get; set; }
 
         [JsonProperty("System.ChangedBy")]
-        public SystemAssignedToClass SystemChangedBy { get; set; }
+        public MicrosoftVstsCommonClosedBy SystemChangedBy { get; set; }
 
         [JsonProperty("System.CommentCount")]
         public long SystemCommentCount { get; set; }
@@ -100,29 +103,23 @@ namespace App5.Models.DTO
         [JsonProperty("System.Title")]
         public string SystemTitle { get; set; }
 
-        [JsonProperty("System.BoardColumn")]
-        public string SystemBoardColumn { get; set; }
-
-        [JsonProperty("System.BoardColumnDone")]
-        public bool SystemBoardColumnDone { get; set; }
-
         [JsonProperty("Microsoft.VSTS.Common.StateChangeDate")]
         public DateTimeOffset MicrosoftVstsCommonStateChangeDate { get; set; }
 
+        [JsonProperty("Microsoft.VSTS.Common.ClosedDate")]
+        public DateTimeOffset MicrosoftVstsCommonClosedDate { get; set; }
+
+        [JsonProperty("Microsoft.VSTS.Common.ClosedBy")]
+        public MicrosoftVstsCommonClosedBy MicrosoftVstsCommonClosedBy { get; set; }
+
         [JsonProperty("Microsoft.VSTS.Common.Priority")]
         public long MicrosoftVstsCommonPriority { get; set; }
-
-        [JsonProperty("WEF_98AF844AB34044DFBDE58130E2FA9F64_Kanban.Column")]
-        public string Wef98Af844Ab34044Dfbde58130E2Fa9F64KanbanColumn { get; set; }
-
-        [JsonProperty("WEF_98AF844AB34044DFBDE58130E2FA9F64_Kanban.Column.Done")]
-        public bool Wef98Af844Ab34044Dfbde58130E2Fa9F64KanbanColumnDone { get; set; }
 
         [JsonProperty("System.Description")]
         public string SystemDescription { get; set; }
     }
 
-    public partial class SystemAssignedToClass
+    public partial class MicrosoftVstsCommonClosedBy
     {
         [JsonProperty("displayName")]
         public string DisplayName { get; set; }
@@ -131,7 +128,7 @@ namespace App5.Models.DTO
         public Uri Url { get; set; }
 
         [JsonProperty("_links")]
-        public Links Links { get; set; }
+        public MicrosoftVstsCommonClosedByLinks Links { get; set; }
 
         [JsonProperty("id")]
         public Guid Id { get; set; }
@@ -146,16 +143,40 @@ namespace App5.Models.DTO
         public string Descriptor { get; set; }
     }
 
-    public partial class Links
+    public partial class MicrosoftVstsCommonClosedByLinks
     {
         [JsonProperty("avatar")]
-        public Avatar Avatar { get; set; }
+        public PurpleFields Avatar { get; set; }
     }
 
-    public partial class Avatar
+    public partial class PurpleFields
     {
         [JsonProperty("href")]
         public Uri Href { get; set; }
+    }
+
+    public partial class WorkItemInstanceLinks
+    {
+        [JsonProperty("self")]
+        public PurpleFields Self { get; set; }
+
+        [JsonProperty("workItemUpdates")]
+        public PurpleFields WorkItemUpdates { get; set; }
+
+        [JsonProperty("workItemRevisions")]
+        public PurpleFields WorkItemRevisions { get; set; }
+
+        [JsonProperty("workItemComments")]
+        public PurpleFields WorkItemComments { get; set; }
+
+        [JsonProperty("html")]
+        public PurpleFields Html { get; set; }
+
+        [JsonProperty("workItemType")]
+        public PurpleFields WorkItemType { get; set; }
+
+        [JsonProperty("fields")]
+        public PurpleFields Fields { get; set; }
     }
 
 

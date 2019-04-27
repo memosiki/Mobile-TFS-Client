@@ -110,7 +110,7 @@ namespace App5.Services
                 Id = Guid.NewGuid().ToString(),
                 Text = x.Fields.SystemTitle?.ToString(),
                 Description = x.Fields.SystemDescription?.ToString(),
-                State = x.Fields.SystemBoardColumn?.ToString(),
+                State = x.Fields.SystemState?.ToString(),
                 AssignedTo = x.Fields.SystemAssignedTo?.DisplayName?.ToString(),
                 Category = x.Fields.SystemWorkItemType?.ToString(),
                 Icon = Item.GetIcon(x.Fields.SystemWorkItemType?.ToString())
