@@ -107,7 +107,7 @@ namespace App5.Services
 
             var api = items.Select(x => new Item()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = x.Id.ToString(),
                 Text = x.Fields.SystemTitle?.ToString(),
                 Description = x.Fields.SystemDescription?.ToString(),
                 State = x.Fields.SystemState?.ToString(),
@@ -117,6 +117,10 @@ namespace App5.Services
             });
 
             return api.ToArray().Reverse();
+        }
+        async public Task<bool> SetWorkerAsync(Item item, string id)
+        {
+            return await Task.FromResult(false);
         }
         //public async Task<IEnumerable<Worker>> GetWorkersAsync(bool forceRefresh = false)
         //{

@@ -61,7 +61,7 @@ namespace App5.ViewModels
             IsBusy = true;
             try
             {
-                await WorkerStore.SetWorkerAsync(worker, Item);
+                await WorkerStore.SetWorkerAsync(worker, Item.Id);
             }
             catch (Exception ex)
             {

@@ -29,11 +29,11 @@
 
             <htmlLabel:HtmlLabel Text="{Binding Item.Description}" FontSize="Small"/>
             <!--<htmlLabel:HtmlLabel Text="{Binding HtmlString}"/>-->
-           <Picker Title="Select a person to redirect the issue"  
+            <Picker Title="Select a person to redirect the issue"  
                    TitleColor="CornflowerBlue"
-                   ItemsSource="{Binding WorkersList.}"
-                   SelectedIndexChanged="Handle_SelectedIndexChanged"
-                   >
+                   ItemsSource="{Binding WorkersList}" >
+                <!--SelectedIndexChanged="Handle_SelectedIndexChanged">-->
+
                 <!--<Picker.Behaviors>
                     <behaviors:EventHandlerBehavior EventName="SelectedIndexChanged">
                         <behaviors:InvokeCommandAction Command="{Binding SelectedProviderChanged}" />

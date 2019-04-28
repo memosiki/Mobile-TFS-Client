@@ -177,7 +177,7 @@ namespace App5.Models.DTO
 
         [JsonProperty("fields")]
         public PurpleFields Fields { get; set; }
-    }   
+    }
 
 
     ///////
@@ -232,6 +232,8 @@ namespace App5.Models.DTO
         [JsonProperty("href")]
         public Uri Href { get; set; }
     }
-
+    ///////
+    /// <summary>
+    ///
 
 }
