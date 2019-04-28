@@ -116,7 +116,21 @@ namespace App5.Services
                 Icon = Item.GetIcon(x.Fields.SystemWorkItemType?.ToString())
             });
 
-            return api.ToArray();
+            return api.ToArray().Reverse();
         }
+        //public async Task<IEnumerable<Worker>> GetWorkersAsync(bool forceRefresh = false)
+        //{
+        //    string workersListURL = "https://dev.azure.com/test-hackathon/_apis/projects/bfb9c42e-3fe3-4776-9dda-616524dde178/teams/22e14cca-4ddf-47aa-83d8-36c1d94992bf/members?api-version=5.0";
+        //    var response = await GetAuthorizedUrlAsync(workersListURL);
+        //    var items = JsonConvert.DeserializeObject<Workers>(response);
+        //    var api = items.Value.Select(x => new Worker()
+        //    {
+        //        Id = x.Identity.Id.ToString(),
+        //        Name = x.Identity.DisplayName.ToString(),
+        //        Email = x.Identity.UniqueName.ToString(),
+        //    });
+        //    return api.ToArray();
+        //}
+
     }
 }

@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:htmlLabel="clr-namespace:LabelHtml.Forms.Plugin.Abstractions;assembly=HtmlLabel.Forms.Plugin"
+             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
              x:Class="App5.Views.ItemDetailPage"
              Title="{Binding Title}">
     <ScrollView>
@@ -24,7 +26,20 @@
             <Label Text="Assigned to:" FontSize="Medium" />
             <Label Text="{Binding Item.AssignedTo}" FontSize="Small"/>
             <Label Text="Description:" FontSize="Medium" />
-            <Label Text="{Binding Item.Description}" FontSize="Small"/>
+
+            <htmlLabel:HtmlLabel Text="{Binding Item.Description}" FontSize="Small"/>
+            <!--<htmlLabel:HtmlLabel Text="{Binding HtmlString}"/>-->
+           <Picker Title="Select a person to redirect the issue"  
+                   TitleColor="CornflowerBlue"
+                   ItemsSource="{Binding WorkersList.}"
+                   SelectedIndexChanged="Handle_SelectedIndexChanged"
+                   >
+                <!--<Picker.Behaviors>
+                    <behaviors:EventHandlerBehavior EventName="SelectedIndexChanged">
+                        <behaviors:InvokeCommandAction Command="{Binding SelectedProviderChanged}" />
+                    </behaviors:EventHandlerBehavior>
+                </Picker.Behaviors>-->
+            </Picker>
         </StackLayout>
     </ScrollView>
 </ContentPage>

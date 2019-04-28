@@ -20,7 +20,9 @@ namespace App5.Views
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            this.viewModel = viewModel;
+            BindingContext = this.viewModel;
+            //BindingContext = this.viewModel = viewModel;
         }
 
         public ItemDetailPage()
@@ -35,6 +37,18 @@ namespace App5.Views
 
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            viewModel.LoadWorkersCommand.Execute(null);
+        }
+
+        async void Handle_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            var selectedOption = (sender as Picker).SelectedItem as Worker;
+            await viewModel.ChangeAssignedWorker(selectedOption);
         }
     }
 }

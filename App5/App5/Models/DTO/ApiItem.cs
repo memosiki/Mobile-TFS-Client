@@ -177,6 +177,60 @@ namespace App5.Models.DTO
 
         [JsonProperty("fields")]
         public PurpleFields Fields { get; set; }
+    }   
+
+
+    ///////
+    ///
+    public partial class Workers
+    {
+        [JsonProperty("value")]
+        public Value[] Value { get; set; }
+
+        [JsonProperty("count")]
+        public long Count { get; set; }
+    }
+
+    public partial class Value
+    {
+        [JsonProperty("identity")]
+        public Identity Identity { get; set; }
+    }
+
+    public partial class Identity
+    {
+        [JsonProperty("displayName")]
+        public string DisplayName { get; set; }
+
+        [JsonProperty("url")]
+        public Uri Url { get; set; }
+
+        [JsonProperty("_links")]
+        public Links Links { get; set; }
+
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
+
+        [JsonProperty("uniqueName")]
+        public string UniqueName { get; set; }
+
+        [JsonProperty("imageUrl")]
+        public Uri ImageUrl { get; set; }
+
+        [JsonProperty("descriptor")]
+        public string Descriptor { get; set; }
+    }
+
+    public partial class Links
+    {
+        [JsonProperty("avatar")]
+        public Avatar Avatar { get; set; }
+    }
+
+    public partial class Avatar
+    {
+        [JsonProperty("href")]
+        public Uri Href { get; set; }
     }
 
 
